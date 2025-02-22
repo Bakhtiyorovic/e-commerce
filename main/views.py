@@ -17,8 +17,9 @@ def Shopping_cart(request):
 def Checkout(request):
     return render(request, 'checkout.html')
 
-def Blog(request):  
-    return render(request, 'blog.html')
+def Blog(request):
+    blog_posts = BlogPost.objects.all().order_by('-date')
+    return render(request, 'blog.html', {'blog_posts': blog_posts})
 
 def Blog_details(request):
     return render(request, 'blog-details.html')
