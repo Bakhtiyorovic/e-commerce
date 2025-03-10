@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import *
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 # Create your views here.
 
 def Home(request):
@@ -29,9 +34,60 @@ def Shop(request):
     })
 
 
-
+@login_required
 def Shopping_cart(request):
-    return render(request, 'shopping-cart.html')
+    cart_items = Cart.objects.filter(user=request.user)
+    cart_subtotal = sum(item.total_price() for item in cart_items)
+    return render(request, 'shopping-cart.html',
+                  {'cart_items': cart_items, 'cart_subtotal': cart_subtotal, 'cart_total': cart_subtotal})
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart_item, created = Cart.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    return redirect('shopping_cart')
+
+
+@login_required
+def remove_from_cart(request, cart_id):
+    cart_item = get_object_or_404(Cart, id=cart_id, user=request.user)
+    cart_item.delete()
+    return redirect('shopping_cart')
+
+
+@csrf_exempt
+def update_cart(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            cart_items = data.get("cart_items", [])
+            cart_subtotal = 0
+
+            for item in cart_items:
+                product_id = item.get("product_id")
+                quantity = int(item.get("quantity"))
+
+                cart_item = Cart.objects.get(product_id=product_id, user=request.user)
+                cart_item.quantity = quantity
+                cart_item.save()
+
+                cart_subtotal += cart_item.product.price * quantity
+
+            cart_total = cart_subtotal  # Agar soliq yoki chegirma bo‘lsa, shu yerda qo‘shish mumkin
+
+            return JsonResponse({"cart_subtotal": cart_subtotal, "cart_total": cart_total})
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+
 
 
 def Checkout(request):

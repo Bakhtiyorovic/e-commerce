@@ -107,7 +107,6 @@
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="{% url 'about' %}">About Us</a></li>             
-                                    <li><a href="{% url 'shopping_cart' %}">Shopping Cart</a></li>
                                     <li><a href="{% url 'checkout' %}">Check Out</a></li>
                                     <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
                                 </ul>
@@ -119,10 +118,12 @@
                 </div>
                 <div class="col-lg-3 col-md-3">
                     <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="/static/img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="/static/img/icon/heart.png" alt=""></a>
+                        {% if request.user.is_authenticated %}
                         <a href="{% url 'shopping_cart' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
+                        {% endif %}
+                        <div class="price">${{ cart_total }}</div>
                     </div>
                 </div>
             </div>
@@ -166,115 +167,50 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for item in cart_items %}
                                 <tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                            <img src="/static/img/shopping-cart/cart-1.jpg" alt="">
+                                            <img src="{{ item.product.image.url }}" alt="">
                                         </div>
                                         <div class="product__cart__item__text">
-                                            <h6>T-shirt Contrast Pocket</h6>
-                                            <h5>$98.49</h5>
+                                            <h6>{{ item.product.name }}</h6>
+                                            <h5>${{ item.product.price }}</h5>
                                         </div>
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
+                                            <input type="number" value="{{ item.quantity }}" class="update-cart" data-product="{{ item.product.id }}">
                                         </div>
                                     </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
+                                    <td class="cart__price">${{ item.total_price }}</td>
+                                    <td class="cart__close">
+                                        <a href="{% url 'remove_from_cart' item.id %}"><i class="fa fa-close"></i></a>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="/static/img/shopping-cart/cart-2.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Diagonal Textured Cap</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 32.50</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="/static/img/shopping-cart/cart-3.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 47.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img src="/static/img/shopping-cart/cart-4.jpg" alt="">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>Basic Flowing Scarf</h6>
-                                            <h5>$98.49</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price">$ 30.00</td>
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6">
                             <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
+                                <a href="{% url 'shop' %}">Continue Shopping</a>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6">
                             <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                                <a href="{% url 'shopping_cart' %}" id="update-cart-btn">Update cart</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
-                        </form>
-                    </div>
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            <li>Subtotal <span>$<span id="cart-subtotal">{{ cart_subtotal }}</span></span></li>
+                            <li>Total <span>$<span id="cart-total">{{ cart_total }}</span></span></li>
                         </ul>
                         <a href="{% url 'checkout' %}" class="primary-btn">Proceed to checkout</a>
                     </div>
@@ -282,6 +218,28 @@
             </div>
         </div>
     </section>
+    
+    <script>
+    document.getElementById("update-cart-btn").addEventListener("click", function () {
+        let cartItems = [];
+        document.querySelectorAll(".update-cart").forEach(input => {
+            cartItems.push({ product_id: input.dataset.product, quantity: input.value });
+        });
+    
+        fetch("{% url 'update_cart' %}", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-CSRFToken": "{{ csrf_token }}" },
+            body: JSON.stringify({ cart_items: cartItems })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("cart-subtotal").innerText = data.cart_subtotal;
+            document.getElementById("cart-total").innerText = data.cart_total;
+        });
+    });
+    </script>
+    
+    
     <!-- Shopping Cart Section End -->
 
     <!-- Footer Section Begin -->

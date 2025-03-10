@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(ContactMessage)
 admin.site.register(BlogPost)
 admin.site.register(Product)
-
+admin.site.register(Cart)
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'image')
