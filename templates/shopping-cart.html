@@ -79,14 +79,7 @@
                                 <a href="{% url 'signup' %}">Sign in</a>
                             {% endif %}  
                             </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -150,7 +143,7 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
+    
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
@@ -162,7 +155,7 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Size</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -173,17 +166,15 @@
                                         <div class="product__cart__item__pic">
                                             <img src="{{ item.product.image.url }}" alt="">
                                         </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>{{ item.product.name }}</h6>
-                                            <h5>${{ item.product.price }}</h5>
-                                        </div>
                                     </td>
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <input type="number" value="{{ item.quantity }}" class="update-cart" data-product="{{ item.product.id }}">
                                         </div>
                                     </td>
-                                    <td class="cart__price">${{ item.total_price }}</td>
+                                    <td class="cart__size">
+                                        <input type="text" name="size" value="{{ item.size }}" class="update-size" data-product="{{ item.product.id }}">
+                                    </td>
                                     <td class="cart__close">
                                         <a href="{% url 'remove_from_cart' item.id %}"><i class="fa fa-close"></i></a>
                                     </td>
@@ -220,28 +211,51 @@
     </section>
     
     <script>
-    document.getElementById("update-cart-btn").addEventListener("click", function () {
-        let cartItems = [];
-        document.querySelectorAll(".update-cart").forEach(input => {
-            cartItems.push({ product_id: input.dataset.product, quantity: input.value });
+        document.getElementById("update-cart-btn").addEventListener("click", function () {
+            let cartItems = [];
+        
+            document.querySelectorAll(".update-cart").forEach(input => {
+                let productId = input.dataset.product;
+                let quantity = input.value;
+                let sizeInput = document.querySelector(`.update-size[data-product="${productId}"]`); // Size inputni olish
+                let size = sizeInput ? sizeInput.value : null; // Agar size input bo'lsa, qiymatini olish
+        
+                cartItems.push({
+                    product_id: productId,
+                    quantity: quantity,
+                    size: size  // Size ham jo‘natiladi
+                });
+            });
+        
+            fetch("{% url 'update_cart' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ cart_items: cartItems })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("cart-subtotal").innerText = data.cart_subtotal;
+                    document.getElementById("cart-total").innerText = data.cart_total;
+                }
+            })
+            .catch(error => console.error("Error:", error));
         });
-    
-        fetch("{% url 'update_cart' %}", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "X-CSRFToken": "{{ csrf_token }}" },
-            body: JSON.stringify({ cart_items: cartItems })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("cart-subtotal").innerText = data.cart_subtotal;
-            document.getElementById("cart-total").innerText = data.cart_total;
-        });
-    });
-    </script>
-    
-    
+        </script>
+        
     <!-- Shopping Cart Section End -->
+<style>
 
+.quantity-input,
+.total-input {
+    width: 60px; /* Maydon kengligini o'zgartirish */
+    text-align: center;
+}
+
+</style>
     <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="container">
@@ -277,18 +291,20 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+    <div class="footer__widget">
+        <h6>Newsletter</h6>
+        <div class="footer__newslatter">
+            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Your email" required>
+                <button type="submit"><span class="icon_mail_alt"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
             </div>
 
         </div>

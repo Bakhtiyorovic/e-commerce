@@ -13,4 +13,7 @@ urlpatterns = [
     path('add-to-cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<int:cart_id>/', remove_from_cart, name='remove_from_cart'),
     path("update-cart/", update_cart, name="update_cart"),
+    path('shop/category/<int:category_id>/', FilterByCategory, name='filter_by_category'),
+    path('shop/tag/<int:tag_id>/', FilterByTag, name='filter_by_tag'),
+    path("subscribe/", subscribe_newsletter, name="subscribe_newsletter"),
 ]

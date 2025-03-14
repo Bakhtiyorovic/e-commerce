@@ -6,6 +6,10 @@ admin.site.register(ContactMessage)
 admin.site.register(BlogPost)
 admin.site.register(Product)
 admin.site.register(Cart)
+admin.site.register(Category)
+admin.site.register(Tag)
+admin.site.register(Order)
+admin.site.register(NewsletterSubscriber)
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'image')

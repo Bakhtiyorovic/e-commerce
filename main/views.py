@@ -6,31 +6,82 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from .forms import *
+from django.http import HttpResponse
+from django.contrib import messages
 # Create your views here.
 
 def Home(request):
-    return render(request, 'index.html')
+    latest_posts = BlogPost.objects.order_by('-date')[:3]  # Eng so‘nggi 3 ta post
+    return render(request, 'index.html', {'latest_posts': latest_posts})
 
-
+#Shop sahifalari uchun:
 def Shop(request):
-    sort_option = request.GET.get('sort', 'default')  # URL'dan tartiblash parametrini olish
-    page_number = request.GET.get('page', 1)  # URL'dan sahifa raqamini olish (default: 1)
+    sort_option = request.GET.get('sort', 'default')
+    page_number = request.GET.get('page', 1)
+    price_range = request.GET.get('price', None)
+    search_query = request.GET.get('search', '')
 
-    # Saralash opsiyalarini qo‘llash
+    products = Product.objects.all()
+
+    # Qidiruv bo‘yicha filtr
+    if search_query:
+        products = products.filter(name__icontains=search_query)
+
+    # Narx bo‘yicha filter qo‘shamiz
+    if price_range:
+        try:
+            min_price, max_price = price_range.split('-')
+            if max_price == '+':  # Agar `250+` kelsa
+                products = products.filter(price__gte=min_price)
+            else:
+                products = products.filter(price__gte=min_price, price__lte=max_price)
+        except ValueError:
+            pass  # Agar noto‘g‘ri format bo‘lsa, filtr qo‘llanmaydi
+
+    # Saralash opsiyalari
     if sort_option == 'low_to_high':
-        products = Product.objects.all().order_by('price')
+        products = products.order_by('price')
     elif sort_option == 'high_to_low':
-        products = Product.objects.all().order_by('-price')
-    else:
-        products = Product.objects.all()
+        products = products.order_by('-price')
 
-    # Sahifalashni qo‘llash (har bir sahifada 12 ta mahsulot)
+    # Sahifalash
     paginator = Paginator(products, 12)
     paginated_products = paginator.get_page(page_number)
 
+    # Yon panel uchun kategoriyalar va taglar
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+
     return render(request, 'shop.html', {
         'products': paginated_products,
-        'sort_option': sort_option
+        'sort_option': sort_option,
+        'search_query': search_query,
+        'categories': categories,
+        'tags': tags,
+    })
+
+
+def FilterByCategory(request, category_id):
+    products = Product.objects.filter(category_id=category_id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+
+    return render(request, 'shop.html', {
+        'products': products,
+        'categories': categories,
+        'tags': tags
+    })
+
+def FilterByTag(request, tag_id):
+    products = Product.objects.filter(tags__id=tag_id)
+    categories = Category.objects.all()
+    tags = Tag.objects.all()
+
+    return render(request, 'shop.html', {
+        'products': products,
+        'categories': categories,
+        'tags': tags
     })
 
 
@@ -70,16 +121,19 @@ def update_cart(request):
             for item in cart_items:
                 product_id = item.get("product_id")
                 quantity = int(item.get("quantity"))
+                size = item.get("size", None)  # Size maydonini ham olish
 
                 cart_item = Cart.objects.get(product_id=product_id, user=request.user)
                 cart_item.quantity = quantity
+                if size:  # Foydalanuvchi size tanlagan bo'lsa
+                    cart_item.size = size
                 cart_item.save()
 
                 cart_subtotal += cart_item.product.price * quantity
 
             cart_total = cart_subtotal  # Agar soliq yoki chegirma bo‘lsa, shu yerda qo‘shish mumkin
 
-            return JsonResponse({"cart_subtotal": cart_subtotal, "cart_total": cart_total})
+            return JsonResponse({"cart_subtotal": cart_subtotal, "cart_total": cart_total, "success": True})
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
@@ -89,11 +143,56 @@ def update_cart(request):
 
 
 
-
+@login_required
 def Checkout(request):
-    return render(request, 'checkout.html')
+    if request.method == "POST":
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        country = request.POST.get("country")
+        address = request.POST.get("address")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        zip_code = request.POST.get("zip_code")
+        phone = request.POST.get("phone")
+        email = request.POST.get("email")
+        order_notes = request.POST.get("order_notes")
+
+        # Custom User Model bilan bog‘langan holda ma'lumotlarni saqlash
+        order = Order.objects.create(
+            user=request.user,  # Custom User Model qo‘llanadi
+            first_name=first_name,
+            last_name=last_name,
+            country=country,
+            address=address,
+            city=city,
+            state=state,
+            zip_code=zip_code,
+            phone=phone,
+            email=email,
+            order_notes=order_notes,
+        )
+        order.save()
+
+        return redirect("checkout")  # Checkout sahifasiga qaytish
+
+    # Agar session orqali savat ishlatilsa
+    cart = request.session.get('cart', {})
+
+    # Agar bazadan olish kerak bo'lsa
+    cart_items = Cart.objects.filter(user=request.user)
+
+    total_price = sum(item.product.price * item.quantity for item in cart_items)  # Umumiy summa
+
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price
+    }
 
 
+    return render(request, "checkout.html", context )
+
+
+#Blog sahifalari uchun:
 def Blog(request):
     blog_posts = BlogPost.objects.all().order_by('-date')
     return render(request, 'blog.html', {'blog_posts': blog_posts})
@@ -106,7 +205,7 @@ def Blog_details(request):
 def About(request): 
     return render(request, 'about.html')
 
-
+#Contact sahifasi uchun:
 def Contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -122,3 +221,18 @@ def Contact(request):
     else:
         return render(request, 'contact.html')
 
+
+
+def subscribe_newsletter(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        if email:
+            if not NewsletterSubscriber.objects.filter(email=email).exists():
+                NewsletterSubscriber.objects.create(email=email)
+                messages.success(request, "You have successfully subscribed!")
+            else:
+                messages.warning(request, "This email is already subscribed.")
+        else:
+            messages.error(request, "Please enter a valid email address.")
+
+    return redirect(request.META.get("HTTP_REFERER", "/"))
