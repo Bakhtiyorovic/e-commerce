@@ -67,16 +67,16 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'logout' %}">Log out /{{ request.user.username }}/</a>
+                                <a href="{% url 'logout' %}">Chiqish /{{ request.user.username }}/</a>
                             {% else %}
-                                <a href="{% url 'signup' %}">Sign in</a>
+                                <a href="{% url 'signup' %}">Kirish</a>
                             {% endif %}
                             </div>
                         </div>
@@ -94,17 +94,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="active"><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+                            <li><a href="{% url 'shop' %}">Do‘kon</a></li>
+                            <li><a href="#">Sahifalar</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'about' %}">About Us</a></li>                                 
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <li><a href="{% url 'about' %}">Biz Haqimizda</a></li>                                 
+                                    <li><a href="{% url 'blog_details' %}">Blog Tafsilotlari</a></li>
+                                    <li><a href="{% url 'shopping_cart' %}">Savat</a></li>
+                                    <li><a href="{% url 'checkout' %}">Xaridni yakunlash</a></li>
+                                    <li> <a href="{% url 'orders_list' %}">Buyurtmalarim</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'blog' %}">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contacts</a></li>
+                            <li><a href="{% url 'contact' %}">Kontaktlar</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -115,7 +117,7 @@
                         {% else %}
                         <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
                         {% endif %}
-                        <div class="price">${{ cart_total_price }}</div>
+                        <div class="price">{{ cart_total_price }} so'm</div>
 
                     </div>
                 </div>
@@ -133,17 +135,11 @@
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
                             <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>Fall - Winter Collections 2030</h2>
-                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
+                                <h6>Yozgi kolleksiya</h6>
+                                <h2>Kuz-qish kolleksiyalari 2030</h2>
+                                <p>Luks mahsulotlar yaratadigan mutaxassis brend. Axloqiy jihatdan ishlab chiqarilgan va 
+                                mukammal sifatga bo‘lgan qat’iy sadoqat bilan yaratilgan.</p>
+                                <a href="{% url 'shop' %}" class="primary-btn">Hoziroq xarid qiling <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -154,17 +150,11 @@
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 col-md-8">
                             <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>Fall - Winter Collections 2030</h2>
-                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                                <a href="{% url 'shop' %}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
+                                <h6>Yozgi kolleksiya</h6>
+                                <h2>Kuz-qish kolleksiyalari 2030</h2>
+                                <p>Luks mahsulotlar yaratadigan mutaxassis brend. Axloqiy jihatdan ishlab chiqarilgan va 
+                                mukammal sifatga bo‘lgan qat’iy sadoqat bilan yaratilgan.</p>
+                                <a href="{% url 'shop' %}" class="primary-btn">Hoziroq xarid qiling <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -184,8 +174,8 @@
                             <img src="/static/img/banner/banner-1.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Clothing Collections 2030</h2>
-                            <a href="{% url 'shop' %}">Shop now</a>
+                            <h2>Kiyim Kolleksiyalari 2030</h2>
+                            <a href="{% url 'shop' %}">Hoziroq xarid qiling</a>
                         </div>
                     </div>
                 </div>
@@ -195,8 +185,8 @@
                             <img src="/static/img/banner/banner-2.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Accessories</h2>
-                            <a href="{% url 'shop' %}">Shop now</a>
+                            <h2>Aksessuarlar</h2>
+                            <a href="{% url 'shop' %}">Hoziroq xarid qiling</a>
                         </div>
                     </div>
                 </div>
@@ -206,8 +196,8 @@
                             <img src="/static/img/banner/banner-3.jpg" alt="">
                         </div>
                         <div class="banner__item__text">
-                            <h2>Shoes Spring 2030</h2>
-                            <a href="{% url 'shop' %}">Shop now</a>
+                            <h2>Poyabzallar – 2030 yil bahori</h2>
+                            <a href="{% url 'shop' %}">Hoziroq xarid qiling</a>
                         </div>
                     </div>
                 </div>
@@ -226,22 +216,22 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="categories__text">
-                        <h2>Clothings Hot <br /> <span>Shoe Collection</span> <br /> Accessories</h2>
+                        <h2>Trend kiyimlar <br /> <span>Poyabzal kolleksiyasi</span> <br /> Aksessuarlar</h2>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="categories__hot__deal">
                         <img src="/static/img/product-sale.png" alt="">
                         <div class="hot__deal__sticker">
-                            <span>Sale Of</span>
-                            <h5>$29.99</h5>
+                            <span>Chegirma</span>
+                            <h5>20%</h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
                     <div class="categories__deal__countdown">
-                        <span>Deal Of The Week</span>
-                        <h2>Multi-pocket Chest Bag Black</h2>
+                        <span>Haftaning Taklifi</span>
+                        <h2>Multi-pocket chest bag — Qora</h2>
                         <div class="categories__deal__countdown__timer" id="countdown">
                             <div class="cd-item">
                                 <span>3</span>
@@ -260,7 +250,7 @@
                                 <p>Seconds</p>
                             </div>
                         </div>
-                        <a href="{% url 'shop' %}" class="primary-btn">Shop now</a>
+                        <a href="{% url 'shop' %}" class="primary-btn">Hoziroq xarid qiling</a>
                     </div>
                 </div>
             </div>
@@ -285,7 +275,7 @@
                 <div class="col-lg-4">
                     <div class="instagram__text">
                         <h2>Instagram</h2>
-                        <p>"Modern clothing store! The latest models for women, men and children. High-quality materials, stylish designs. Fast delivery, discounts up to 50%. Follow us and create your style!"</p>
+                        <p>"Zamonaviy kiyim do'koni! Ayollar, erkaklar va bolalar uchun eng so'nggi modellar. Yuqori sifatli materiallar, zamonaviy dizaynlar. Tez yetkazib berish, 50% gacha chegirmalar. Bizni kuzatib boring va o'z uslubingizni yarating!"</p>
                         <h3>#Male_Fashion</h3>
                     </div>
                 </div>
@@ -300,8 +290,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Latest News</span>
-                        <h2>Fashion New Trends</h2>
+                        <span>So'ngi Yangiliklar</span>
+                        <h2>Moda yangiliklari</h2>
                     </div>
                 </div>
             </div>
@@ -313,7 +303,7 @@
                         <div class="blog__item__text">
                             <span><img src="/static/img/icon/calendar.png" alt=""> {{ l_post.date }}</span>
                             <h5>{{ l_post.description }}</h5>
-                            <a href="{% url 'about' %}">Read More</a>
+                            <a href="{% url 'about' %}">Batafsil</a>
                         </div>
                     </div>
                 </div>
@@ -332,29 +322,27 @@
                         <div class="footer__logo">
                             <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="/static/img/payment.png" alt=""></a>
+                        <p>Mijoz dizaynni o'z ichiga olgan noyob biznes modelimizning markazidir.</p>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Kiyim Do‘koni</a></li>
+                            <li><a href="#">Trenddagi Poyabzallar</a></li>
+                            <li><a href="#">Aksessuarlar</a></li>
+                            <li><a href="#">Chegirma</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Biz Bilan Bog'lanish</a></li>
+                            <li><a href="#">Yetkazib Berish</a></li>
+                            <li><a href="#">Qaytish & almashish</a></li>
                         </ul>
                     </div>
                 </div>
@@ -362,10 +350,10 @@
     <div class="footer__widget">
         <h6>Newsletter</h6>
         <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <p>Yangi kelganlar, kitoblar, sotuvlar va promolar haqida birinchi bo'lib xabardor bo'ling!</p>
             <form action="{% url 'subscribe_newsletter' %}" method="POST">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
+                <input type="email" name="email" placeholder="Sizning emailingiz" required>
                 <button type="submit"><span class="icon_mail_alt"></span></button>
             </form>
         </div>

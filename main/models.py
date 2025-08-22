@@ -80,6 +80,10 @@ class Order(models.Model):
     def __str__(self):
         return f"Order by {self.first_name} {self.last_name}"
 
+    def total_price(self):
+        """Buyurtmadagi barcha itemlarning jami narxi"""
+        return sum(item.total_price() for item in self.items.all())
+
 
 
 class NewsletterSubscriber(models.Model):
@@ -88,3 +92,17 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    size = models.CharField(max_length=10, blank=True, null=True)
+
+    def total_price(self):
+        return self.quantity * self.product.price
+
+    def __str__(self):
+        return f"{self.product.name} ({self.quantity})"

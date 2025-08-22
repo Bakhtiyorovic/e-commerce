@@ -67,19 +67,18 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'logout' %}">Log out /{{ request.user.username }}/</a>
+                                <a href="{% url 'logout' %}">Chiqish /{{ request.user.username }}/</a>
                             {% else %}
-                                <a href="{% url 'signup' %}">Sign in</a>
+                                <a href="{% url 'signup' %}">Kirish</a>
                             {% endif %}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -95,17 +94,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+                            <li><a href="{% url 'shop' %}">Do‘kon</a></li>
+                            <li class="active"><a href="#">Sahifalar</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'about' %}">About Us</a></li>                                   
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <li><a href="{% url 'about' %}">Biz Haqimizda</a></li>                                 
+                                    <li><a href="{% url 'blog_details' %}">Blog Tafsilotlari</a></li>
+                                    <li><a href="{% url 'shopping_cart' %}">Savat</a></li>
+                                    <li><a href="{% url 'checkout' %}">Xaridni yakunlash</a></li>
+                                    <li> <a href="{% url 'orders_list' %}">Buyurtmalarim</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="{% url 'blog' %}">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contacts</a></li>
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="{% url 'contact' %}">Kontaktlar</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -116,7 +117,7 @@
                         {% else %}
                         <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
                         {% endif %}
-                        <div class="price">${{ cart_total_price }}</div>
+                        <div class="price">{{ cart_total_price }} so'm</div>
 
                     </div>
                 </div>
@@ -132,10 +133,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>About Us</h4>
+                        <h4>Biz Haqimizda</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <span>About Us</span>
+                            <a href="{% url 'home' %}">Bosh Sahifa</a>
+                            <span>Biz Haqimizda</span>
                         </div>
                     </div>
                 </div>
@@ -157,23 +158,23 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">
-                        <h4>Who We Are ?</h4>
-                        <p>Contextual advertising programs sometimes have strict policies that need to be adhered too.
-                        Let’s take Google as an example.</p>
+                        <h4>Biz Kimmiz?</h4>
+                        <p>Kontekstli reklama dasturlari ba'zan qat'iy siyosatlarga ega bo'lib, ularga ham rioya qilish kerak. 
+                        Misol tariqasida Googleni olaylik.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">
-                        <h4>Who We Do ?</h4>
-                        <p>In this digital generation where information can be easily obtained within seconds, business
-                        cards still have retained their importance.</p>
+                        <h4>Biz Nima Qilamiz?</h4>
+                        <p>Ma'lumotni bir necha soniya ichida osongina olish mumkin bo'lgan ushbu raqamli avlodda biznes 
+                        kartalar hali ham o'z ahamiyatini saqlab qolgan.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="about__item">
-                        <h4>Why Choose Us</h4>
-                        <p>A two or three storey house is the ideal way to maximise the piece of earth on which our home
-                        sits, but for older or infirm people.</p>
+                        <h4>Nega Bizni Tanlashingiz Kerak?</h4>
+                        <p>Ikki yoki uch qavatli uy - bu bizning uyimiz joylashgan er qismini maksimal darajada oshirishning ideal usuli 
+                        o'tiradi, lekin keksa yoki zaif odamlar uchun.</p>
                     </div>
                 </div>
             </div>
@@ -188,8 +189,8 @@
                 <div class="col-lg-6 p-0">
                     <div class="testimonial__text">
                         <span class="icon_quotations"></span>
-                        <p>“Going out after work? Take your butane curling iron with you to the office, heat it up,
-                            style your hair before you leave the office and you won’t have to make a trip back home.”
+                        <p>"Ishdan keyin ko'chaga chiqasizmi? Butanli jingalak dazmolingizni o'zingiz bilan ofisga olib boring, uni qizdiring. 
+                        Ofisdan chiqishdan oldin soch turmagini yarating va uyga qaytishingiz shart emas."
                         </p>
                         <div class="testimonial__author">
                             <div class="testimonial__author__pic">
@@ -219,7 +220,7 @@
                         <div class="counter__item__number">
                             <h2 class="cn_num">102</h2>
                         </div>
-                        <span>Our <br />Clients</span>
+                        <span>Bizning <br />Mijozlarimiz</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -227,7 +228,7 @@
                         <div class="counter__item__number">
                             <h2 class="cn_num">30</h2>
                         </div>
-                        <span>Total <br />Categories</span>
+                        <span>Umumiy <br />Kategoriyalar</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -235,7 +236,7 @@
                         <div class="counter__item__number">
                             <h2 class="cn_num">102</h2>
                         </div>
-                        <span>In <br />Country</span>
+                        <span>Davlatlar <br />Soni</span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -244,7 +245,7 @@
                             <h2 class="cn_num">98</h2>
                             <strong>%</strong>
                         </div>
-                        <span>Happy <br />Customer</span>
+                        <span>Baxtli <br />Mijoz</span>
                     </div>
                 </div>
             </div>
@@ -258,8 +259,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Our Team</span>
-                        <h2>Meet Our Team</h2>
+                        <span>Bizning Jamoa</span>
+                        <h2>Jamoamiz Bilan Tanishing</h2>
                     </div>
                 </div>
             </div>
@@ -303,8 +304,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Partner</span>
-                        <h2>Happy Clients</h2>
+                        <span>Partnyor</span>
+                        <h2>Baxtli Mijozlar</h2>
                     </div>
                 </div>
             </div>
@@ -347,29 +348,27 @@
                         <div class="footer__logo">
                             <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="/static/img/payment.png" alt=""></a>
+                        <p>Mijoz dizaynni o'z ichiga olgan noyob biznes modelimizning markazidir.</p>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Kiyim Do‘koni</a></li>
+                            <li><a href="#">Trenddagi Poyabzallar</a></li>
+                            <li><a href="#">Aksessuarlar</a></li>
+                            <li><a href="#">Chegirma</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Biz Bilan Bog'lanish</a></li>
+                            <li><a href="#">Yetkazib Berish</a></li>
+                            <li><a href="#">Qaytish & almashish</a></li>
                         </ul>
                     </div>
                 </div>
@@ -377,10 +376,10 @@
     <div class="footer__widget">
         <h6>Newsletter</h6>
         <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <p>Yangi kelganlar, kitoblar, sotuvlar va promolar haqida birinchi bo'lib xabardor bo'ling!</p>
             <form action="{% url 'subscribe_newsletter' %}" method="POST">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
+                <input type="email" name="email" placeholder="Sizning emailingiz" required>
                 <button type="submit"><span class="icon_mail_alt"></span></button>
             </form>
         </div>

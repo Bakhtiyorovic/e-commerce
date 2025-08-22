@@ -67,19 +67,18 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'logout' %}">Log out /{{ request.user.username }}/</a>
+                                <a href="{% url 'logout' %}">Chiqish /{{ request.user.username }}/</a>
                             {% else %}
-                                <a href="{% url 'signup' %}">Sign in</a>
-                            {% endif %}  
+                                <a href="{% url 'signup' %}">Kirish</a>
+                            {% endif %}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -95,17 +94,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+                            <li><a href="{% url 'shop' %}">Do‘kon</a></li>
+                            <li class="active"><a href="#">Sahifalar</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'about' %}">About Us</a></li>                                 
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <li><a href="{% url 'about' %}">Biz Haqimizda</a></li>                                 
+                                    <li><a href="{% url 'blog_details' %}">Blog Tafsilotlari</a></li>
+                                    <li><a href="{% url 'shopping_cart' %}">Savat</a></li>
+                                    <li><a href="{% url 'checkout' %}">Xaridni yakunlash</a></li>
+                                    <li> <a href="{% url 'orders_list' %}">Buyurtmalarim</a></li>
                                 </ul>
                             </li>
-                            <li class="active"><a href="{% url 'blog' %}">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contacts</a></li>
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="{% url 'contact' %}">Kontaktlar</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -116,7 +117,7 @@
                         {% else %}
                         <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
                         {% endif %}
-                        <div class="price">${{ cart_total_price }}</div>
+                        <div class="price">{{ cart_total_price }} so'm</div>
 
                     </div>
                 </div>
@@ -132,7 +133,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-9 text-center">
                     <div class="blog__hero__text">
-                        <h2>Are you one of the thousands of Iphone owners who has no idea</h2>
+                        <h2>Siz hech qanday tasavvurga ega bo'lmagan minglab Iphone egalaridan birisiz</h2>
                         <ul>
                             <li>By Deercreative</li>
                             <li>February 21, 2019</li>
@@ -166,30 +167,30 @@
                             </ul>
                         </div>
                         <div class="blog__details__text">
-                            <p>Hydroderm is the highly desired anti-aging cream on the block. This serum restricts the
-                                occurrence of early aging sings on the skin and keeps the skin younger, tighter and
-                                healthier. It reduces the wrinkles and loosening of skin. This cream nourishes the skin
-                                and brings back the glow that had lost in the run of hectic years.</p>
-                            <p>The most essential ingredient that makes hydroderm so effective is Vyo-Serum, which is a
-                                product of natural selected proteins. This concentrate works actively in bringing about
-                                the natural youthful glow of the skin. It tightens the skin along with its moisturizing
-                                effect on the skin. The other important ingredient, making hydroderm so effective is
-                                “marine collagen” which along with Vyo-Serum helps revitalize the skin.</p>
+                            <p>Hydroderm - bu blokdagi qarishga qarshi krem. Bu sarum cheklaydi 
+                                erta qarishning paydo bo'lishi teriga ta'sir qiladi va terini yosh, tarang va ushlab turadi 
+                                sog'lomroq. Bu terining bo'shashishi va ajinlarini kamaytiradi. Ushbu krem terini oziqlantiradi 
+                                va og'ir yillar davomida yo'qolgan yorqinlikni qaytaradi.</p>
+                            <p>Gidrodermani samarali qiladigan eng muhim tarkibiy qism Vyo-serum bo'lib, a 
+                                tabiiy tanlangan oqsillar mahsuloti. Ushbu kontsentrat olib kelishda faol ishlaydi 
+                                terining tabiiy yosh porlashi. U terini namlash bilan birga qattiqlashtiradi 
+                                teriga ta'siri. Boshqa muhim tarkibiy qism, gidrodermani juda samarali qilishdir 
+                                Vyo-serum bilan birgalikda terini jonlantirishga yordam beradigan "dengiz kollagen".</p>
                         </div>
                         <div class="blog__details__quote">
                             <i class="fa fa-quote-left"></i>
-                            <p>“When designing an advertisement for a particular product many things should be
-                                researched like where it should be displayed.”</p>
+                            <p>“Muayyan mahsulot uchun reklamani loyihalashda ko'p narsa bo'lishi kerak 
+                                qaerda ko'rsatilishi kerakligi kabi o'rganildi."</p>
                             <h6>_ John Smith _</h6>
                         </div>
                         <div class="blog__details__text">
-                            <p>Vyo-Serum along with tightening the skin also reduces the fine lines indicating aging of
-                                skin. Problems like dark circles, puffiness, and crow’s feet can be control from the
-                                strong effects of this serum.</p>
-                            <p>Hydroderm is a multi-functional product that helps in reducing the cellulite and giving
-                                the body a toned shape, also helps in cleansing the skin from the root and not letting
-                                the pores clog, nevertheless also let’s sweeps out the wrinkles and all signs of aging
-                                from the sensitive near the eyes.</p>
+                            <p>Vyo-serum terini taranglash bilan birga qarishni ko'rsatadigan nozik chiziqlarni ham kamaytiradi 
+                                teri. Qorong'u doiralar, shishish va qarg'a oyoqlari kabi muammolarni nazorat qilish mumkin 
+                                bu sarumning kuchli ta'siri.</p>
+                            <p>Hydroderm ko'p funktsiyali mahsulot bo'lib, selülitni kamaytirishga yordam beradi 
+                                tananing tonlangan shakli, shuningdek, terini ildizdan tozalashga yordam beradi va yo'l qo'ymaydi 
+                                teshiklar tiqilib qoladi, shunga qaramay, keling, ajinlar va barcha qarish belgilarini yo'q qilaylik. 
+                                ko'z yaqinidagi sezgirlardan.</p>
                         </div>
                     </div>
                 </div>
@@ -207,29 +208,27 @@
                         <div class="footer__logo">
                             <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="/static/img/payment.png" alt=""></a>
+                        <p>Mijoz dizaynni o'z ichiga olgan noyob biznes modelimizning markazidir.</p>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Kiyim Do‘koni</a></li>
+                            <li><a href="#">Trenddagi Poyabzallar</a></li>
+                            <li><a href="#">Aksessuarlar</a></li>
+                            <li><a href="#">Chegirma</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Biz Bilan Bog'lanish</a></li>
+                            <li><a href="#">Yetkazib Berish</a></li>
+                            <li><a href="#">Qaytish & almashish</a></li>
                         </ul>
                     </div>
                 </div>
@@ -237,10 +236,10 @@
     <div class="footer__widget">
         <h6>Newsletter</h6>
         <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <p>Yangi kelganlar, kitoblar, sotuvlar va promolar haqida birinchi bo'lib xabardor bo'ling!</p>
             <form action="{% url 'subscribe_newsletter' %}" method="POST">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
+                <input type="email" name="email" placeholder="Sizning emailingiz" required>
                 <button type="submit"><span class="icon_mail_alt"></span></button>
             </form>
         </div>

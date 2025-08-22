@@ -67,19 +67,18 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'logout' %}">Log out /{{ request.user.username }}/</a>
+                                <a href="{% url 'logout' %}">Chiqish /{{ request.user.username }}/</a>
                             {% else %}
-                                <a href="{% url 'signup' %}">Sign in</a>
+                                <a href="{% url 'signup' %}">Kirish</a>
                             {% endif %}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -95,17 +94,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li class="active"><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+                            <li><a href="{% url 'shop' %}">Do‘kon</a></li>
+                            <li class="active"><a href="#">Sahifalar</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'about' %}">About Us</a></li>                                   
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <li><a href="{% url 'about' %}">Biz Haqimizda</a></li>                                 
+                                    <li><a href="{% url 'blog_details' %}">Blog Tafsilotlari</a></li>
+                                    <li><a href="{% url 'shopping_cart' %}">Savat</a></li>
+                                    <li><a href="{% url 'checkout' %}">Xaridni yakunlash</a></li>
+                                    <li> <a href="{% url 'orders_list' %}">Buyurtmalarim</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'blog' %}">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contacts</a></li>
+                            <li><a href="{% url 'contact' %}">Kontaktlar</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -116,7 +117,7 @@
                         {% else %}
                         <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
                         {% endif %}
-                        <div class="price">${{ cart_total_price }}</div>
+                        <div class="price">{{ cart_total_price }} so'm</div>
 
                     </div>
                 </div>
@@ -132,11 +133,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>Check Out</h4>
+                        <h4>Xaridni yakunlash</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
-                            <span>Check Out</span>
+                            <a href="{% url 'home' %}">Bosh Sahifa</a>
+                            <a href="{% url 'shop' %}">Do'kon</a>
+                            <span>Xaridni yakunlash</span>
                         </div>
                     </div>
                 </div>
@@ -153,25 +154,25 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="checkout__title">Billing Details</h6>
+                            <h6 class="checkout__title">To‘lov Tafsilotlari</h6>
                             <div class="checkout__input">
-                                <p>First Name<span>*</span></p>
+                                <p>Ism<span>*</span></p>
                                 <input type="text" name="first_name">
                             </div>
                             <div class="checkout__input">
-                                <p>Last Name<span>*</span></p>
+                                <p>Familiya<span>*</span></p>
                                 <input type="text" name="last_name">
                             </div>
                             <div class="checkout__input">
-                                <p>Country<span>*</span></p>
+                                <p>Davlat<span>*</span></p>
                                 <input type="text" name="country">
                             </div>
                             <div class="checkout__input">
-                                <p>Address<span>*</span></p>
+                                <p>Manzil<span>*</span></p>
                                 <input type="text" name="address">
                             </div>
                             <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
+                                <p>Viloyat / Shahar<span>*</span></p>
                                 <input type="text" name="city">
                             </div>
                             <div class="checkout__input">
@@ -179,7 +180,7 @@
                                 <input type="text" name="zip_code">
                             </div>
                             <div class="checkout__input">
-                                <p>Phone<span>*</span></p>
+                                <p>Telefon<span>*</span></p>
                                 <input type="text" name="phone">
                             </div>
                             <div class="checkout__input">
@@ -187,25 +188,25 @@
                                 <input type="email" name="email">
                             </div>
                             <div class="checkout__input">
-                                <p>Order Notes</p>
+                                <p>Buyurtma Izohlari</p>
                                 <input type="text" name="order_notes">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
-                                <h4 class="order__title">Your order</h4>
-                                <div class="checkout__order__products">Product <span>Total</span></div>
+                                <h4 class="order__title">Buyurtmangiz</h4>
+                                <div class="checkout__order__products">Maxsulot <span>Narxi</span></div>
                                 <ul class="checkout__total__products">
                                     {% for item in cart_items %}
-                                        <li>{{ forloop.counter }}. {{ item.product.name }} <span>${{ item.product.price }}</span></li>
+                                        <li>{{ forloop.counter }}. {{ item.product.name }} <span>{{ item.product.price }} so'm</span></li>
                                     {% endfor %}
                                 </ul>
                                 
                                 <ul class="checkout__total__all">
-                                    <li>Subtotal <span>${{ total_price }}</span></li>
-                                    <li>Total <span>${{ total_price }}</span></li>
+                                    <li>Oraliq <span>{{ total_price }} so'm</span></li>
+                                    <li>Jami <span>{{ total_price }} so'm</span></li>
                                 </ul>                             
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <button type="submit" class="site-btn">BUYURTMA BERISH</button>
                             </div>
                         </div>
                     </div>
@@ -226,29 +227,27 @@
                         <div class="footer__logo">
                             <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="/static/img/payment.png" alt=""></a>
+                        <p>Mijoz dizaynni o'z ichiga olgan noyob biznes modelimizning markazidir.</p>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Kiyim Do‘koni</a></li>
+                            <li><a href="#">Trenddagi Poyabzallar</a></li>
+                            <li><a href="#">Aksessuarlar</a></li>
+                            <li><a href="#">Chegirma</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Biz Bilan Bog'lanish</a></li>
+                            <li><a href="#">Yetkazib Berish</a></li>
+                            <li><a href="#">Qaytish & almashish</a></li>
                         </ul>
                     </div>
                 </div>
@@ -256,10 +255,10 @@
     <div class="footer__widget">
         <h6>Newsletter</h6>
         <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <p>Yangi kelganlar, kitoblar, sotuvlar va promolar haqida birinchi bo'lib xabardor bo'ling!</p>
             <form action="{% url 'subscribe_newsletter' %}" method="POST">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
+                <input type="email" name="email" placeholder="Sizning emailingiz" required>
                 <button type="submit"><span class="icon_mail_alt"></span></button>
             </form>
         </div>
@@ -267,6 +266,7 @@
 </div>
 
             </div>
+
         </div>
     </footer>
     <!-- Footer Section End -->

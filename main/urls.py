@@ -1,5 +1,6 @@
 from .views import *
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path('', Home, name= 'home'),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('shop/category/<int:category_id>/', FilterByCategory, name='filter_by_category'),
     path('shop/tag/<int:tag_id>/', FilterByTag, name='filter_by_tag'),
     path("subscribe/", subscribe_newsletter, name="subscribe_newsletter"),
+    path('orders/', views.OrdersList, name='orders_list'),
+    path('api/orders/', views.orders_api, name='orders_api'),
 ]

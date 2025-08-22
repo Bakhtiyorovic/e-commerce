@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Kirish</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -43,20 +43,20 @@
 <body>
     <div class="container">
         <div class="login-container">
-            <h2 class="text-center">Login</h2>
+            <h2 class="text-center">Kirish</h2>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-custom w-100">Login</button>
+                <button type="submit" class="btn btn-custom w-100">Kirish</button>
             </form>
 
             <!-- Parolni unutdingizmi? -->
             <p class="forgot-password">
-                <a href="{% url 'password_reset' %}">Forgot your password?</a>
+                <a href="{% url 'password_reset' %}">Parolingizni unutdingizmi? (Iltimos o'zgartirmoqchi bo'lgan akkountizni yozib qoldiring!!!)</a>
             </p>
 
             <p class="text-center mt-3">
-                Don't have an account? <a href="{% url 'signup' %}" class="text-danger">Sign Up</a>
+                Hisobingiz yo‘qmi? <a href="{% url 'signup' %}" class="text-danger">Ro‘yxatdan o‘tish</a>
             </p>
         </div>
     </div>

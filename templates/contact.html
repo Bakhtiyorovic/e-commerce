@@ -67,19 +67,18 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7">
                         <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                            <p>Bepul yetkazib berish, 30 kunlik qaytarish yoki pulni qaytarish kafolati.</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-5">
                         <div class="header__top__right">
                             <div class="header__top__links">
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url 'logout' %}">Log out /{{ request.user.username }}/</a>
+                                <a href="{% url 'logout' %}">Chiqish /{{ request.user.username }}/</a>
                             {% else %}
-                                <a href="{% url 'signup' %}">Sign in</a>
+                                <a href="{% url 'signup' %}">Kirish</a>
                             {% endif %}
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -95,17 +94,19 @@
                 <div class="col-lg-6 col-md-6">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'shop' %}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+                            <li><a href="{% url 'shop' %}">Do‘kon</a></li>
+                            <li><a href="#">Sahifalar</a>
                                 <ul class="dropdown">
-                                    <li><a href="{% url 'about' %}">About Us</a></li>                                   
-                                    <li><a href="{% url 'checkout' %}">Check Out</a></li>
-                                    <li><a href="{% url 'blog_details' %}">Blog Details</a></li>
+                                    <li><a href="{% url 'about' %}">Biz Haqimizda</a></li>                                 
+                                    <li><a href="{% url 'blog_details' %}">Blog Tafsilotlari</a></li>
+                                    <li><a href="{% url 'shopping_cart' %}">Savat</a></li>
+                                    <li><a href="{% url 'checkout' %}">Xaridni yakunlash</a></li>
+                                    <li> <a href="{% url 'orders_list' %}">Buyurtmalarim</a></li>
                                 </ul>
                             </li>
                             <li><a href="{% url 'blog' %}">Blog</a></li>
-                            <li class="active"><a href="{% url 'contact' %}">Contacts</a></li>
+                            <li class="active"><a href="{% url 'contact' %}">Kontaktlar</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -116,7 +117,7 @@
                         {% else %}
                         <a href="{% url 'signup' %}"><img src="/static/img/icon/cart.png" alt=""> <span>0</span></a>
                         {% endif %}
-                        <div class="price">${{ cart_total_price }}</div>
+                        <div class="price">{{ cart_total_price }} so'm</div>
 
                     </div>
                 </div>
@@ -128,7 +129,7 @@
 
     <!-- Map Begin -->
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111551.9926412813!2d-90.27317134641879!3d38.606612219170856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sbd!4v1597926938024!5m2!1sen!2sbd" height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23694.207843795555!2d67.26617053712858!3d37.230546711198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f514e5f0a0b6f57%3A0x1d2b0d0d6f4e9a4!2sIslom%20Karimov%20109%2C%20Termiz%2C%20Uzbekistan!5e0!3m2!1sen!2sbd!4v1692216000000!5m2!1sen!2sbd"  height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
     <!-- Map End -->
 
@@ -139,19 +140,19 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__text">
                         <div class="section-title">
-                            <span>Information</span>
-                            <h2>Contact Us</h2>
-                            <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                                strict attention.</p>
+                            <span>Ma'lumotlar</span>
+                            <h2>Biz Bilan Bog'lanish</h2>
+                            <p>Yuqori darajadagi interyer pudratchisi sifatida boshlangan kompaniyadan kutganingizdek, biz to'laymiz 
+                               qattiq e'tibor.</p>
                         </div>
                         <ul>
                             <li>
-                                <h4>America</h4>
-                                <p>195 E Parker Square Dr, Parker, CO 801 <br />+43 982-314-0958</p>
+                                <h4>Termez</h4>
+                                <p> Islom Karimov ko'ch. 109/4 <br />+998-97-268-74-00</p>
                             </li>
                             <li>
-                                <h4>France</h4>
-                                <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
+                                <h4>Toshkent</h4>
+                                <p> - <br /> - </p>
                             </li>
                         </ul>
                     </div>
@@ -168,14 +169,14 @@
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" name="name" placeholder="Name">
+                                    <input type="text" name="name" placeholder="Ism">
                                 </div>
                                 <div class="col-lg-6">
                                     <input type="email" name="email" placeholder="Email">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea name="message" placeholder="Message"></textarea>
-                                    <button type="submit" class="site-btn">Send Message</button>
+                                    <textarea name="message" placeholder="Xabar"></textarea>
+                                    <button type="submit" class="site-btn">Jo'natish</button>
                                 </div>
                             </div>
                         </form>
@@ -195,29 +196,27 @@
                         <div class="footer__logo">
                             <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                         </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="/static/img/payment.png" alt=""></a>
+                        <p>Mijoz dizaynni o'z ichiga olgan noyob biznes modelimizning markazidir.</p>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#">Kiyim Do‘koni</a></li>
+                            <li><a href="#">Trenddagi Poyabzallar</a></li>
+                            <li><a href="#">Aksessuarlar</a></li>
+                            <li><a href="#">Chegirma</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
-                        <h6>Shopping</h6>
+                        <h6>Xarid Qilish</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
+                            <li><a href="#">Biz Bilan Bog'lanish</a></li>
+                            <li><a href="#">Yetkazib Berish</a></li>
+                            <li><a href="#">Qaytish & almashish</a></li>
                         </ul>
                     </div>
                 </div>
@@ -225,10 +224,10 @@
     <div class="footer__widget">
         <h6>Newsletter</h6>
         <div class="footer__newslatter">
-            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+            <p>Yangi kelganlar, kitoblar, sotuvlar va promolar haqida birinchi bo'lib xabardor bo'ling!</p>
             <form action="{% url 'subscribe_newsletter' %}" method="POST">
                 {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
+                <input type="email" name="email" placeholder="Sizning emailingiz" required>
                 <button type="submit"><span class="icon_mail_alt"></span></button>
             </form>
         </div>
@@ -236,9 +235,11 @@
 </div>
 
             </div>
+
         </div>
     </footer>
     <!-- Footer Section End -->
+
 
     <!-- Search Begin -->
     <div class="search-model">

@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 16:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: templates/index.html:6
+msgid "Male_Fashion Template Description"
+msgstr ""
+
+#: templates/index.html:10
+msgid "Template"
+msgstr ""
+
+#: templates/index.html:39 templates/index.html:81
+msgid "Log out"
+msgstr ""
+
+#: templates/index.html:41 templates/index.html:83
+msgid "Sign in"
+msgstr ""
+
+#: templates/index.html:43
+msgid "FAQs"
+msgstr ""
+
+#: templates/index.html:46
+msgid "Usd"
+msgstr ""
+
+#: templates/index.html:62 templates/index.html:74
+msgid "Free shipping, 30-day return or refund guarantee."
+msgstr ""
+
+#: templates/index.html:116
+msgid "Home"
+msgstr ""
+
+#: templates/index.html:117
+msgid "Shop"
+msgstr ""
+
+#: templates/index.html:118
+msgid "Pages"
+msgstr ""
+
+#: templates/index.html:120
+msgid "About Us"
+msgstr ""
+
+#: templates/index.html:121
+msgid "Check Out"
+msgstr ""
+
+#: templates/index.html:122
+msgid "Blog Details"
+msgstr ""
+
+#: templates/index.html:125
+msgid "Blog"
+msgstr ""
+
+#: templates/index.html:126
+msgid "Contacts"
+msgstr ""
+
+#: templates/index.html:154 templates/index.html:174
+msgid "Summer Collection"
+msgstr ""
+
+#: templates/index.html:155 templates/index.html:175
+msgid "Fall - Winter Collections 2030"
+msgstr ""
+
+#: templates/index.html:156 templates/index.html:176
+msgid ""
+"A specialist label creating luxury essentials. Ethically crafted with an "
+"unwavering commitment to exceptional quality."
+msgstr ""
+
+#: templates/index.html:157 templates/index.html:177 templates/index.html:204
+#: templates/index.html:215 templates/index.html:226 templates/index.html:275
+msgid "Shop now"
+msgstr ""
+
+#: templates/index.html:203
+msgid "Clothing Collections 2030"
+msgstr ""
+
+#: templates/index.html:214 templates/index.html:241 templates/index.html:357
+msgid "Accessories"
+msgstr ""
+
+#: templates/index.html:225
+msgid "Shoes Spring 2030"
+msgstr ""
+
+#: templates/index.html:241
+msgid "Clothings Hot"
+msgstr ""
+
+#: templates/index.html:241
+msgid "Shoe Collection"
+msgstr ""
+
+#: templates/index.html:248
+msgid "Sale Of"
+msgstr ""
+
+#: templates/index.html:255
+msgid "Deal Of The Week"
+msgstr ""
+
+#: templates/index.html:256
+msgid "Multi-pocket Chest Bag Black"
+msgstr ""
+
+#: templates/index.html:260
+msgid "Days"
+msgstr ""
+
+#: templates/index.html:264
+msgid "Hours"
+msgstr ""
+
+#: templates/index.html:268
+msgid "Minutes"
+msgstr ""
+
+#: templates/index.html:272
+msgid "Seconds"
+msgstr ""
+
+#: templates/index.html:299
+msgid "Instagram"
+msgstr ""
+
+#: templates/index.html:300
+#, python-format
+msgid ""
+"Modern clothing store! The latest models for women, men and children. High-"
+"quality materials, stylish designs. Fast delivery, discounts up to 50%%. "
+"Follow us and create your style!"
+msgstr ""
+
+#: templates/index.html:315
+msgid "Latest News"
+msgstr ""
+
+#: templates/index.html:316
+msgid "Fashion New Trends"
+msgstr ""
+
+#: templates/index.html:328
+msgid "Read More"
+msgstr ""
+
+#: templates/index.html:347
+msgid ""
+"The customer is at the heart of our unique business model, which includes "
+"design."
+msgstr ""
+
+#: templates/index.html:353 templates/index.html:364
+msgid "Shopping"
+msgstr ""
+
+#: templates/index.html:355
+msgid "Clothing Store"
+msgstr ""
+
+#: templates/index.html:356
+msgid "Trending Shoes"
+msgstr ""
+
+#: templates/index.html:358
+msgid "Sale"
+msgstr ""
+
+#: templates/index.html:366
+msgid "Contact Us"
+msgstr ""
+
+#: templates/index.html:367
+msgid "Payment Methods"
+msgstr ""
+
+#: templates/index.html:368
+msgid "Delivery"
+msgstr ""
+
+#: templates/index.html:369
+msgid "Return & Exchanges"
+msgstr ""
+
+#: templates/index.html:375
+msgid "Newsletter"
+msgstr ""
+
+#: templates/index.html:377
+msgid "Be the first to know about new arrivals, look books, sales & promos!"
+msgstr ""
+
+#: templates/index.html:380
+msgid "Your email"
+msgstr ""
+
+#: templates/index.html:396
+msgid "Search here....."
+msgstr ""
