@@ -16,7 +16,12 @@ urlpatterns = [
     path('password_change/done/',
          PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'),
          name='password_change_done'),
-    path('password_reset/', PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),
+    path('password_reset/', PasswordResetView.as_view(template_name='registration/password_reset.html',
+                                                      email_template_name='registration/password_reset_email.html',
+                                                      # Text email (faqat text bo‘lsa)
+                                                      html_email_template_name='registration/password_reset_email.html'
+                                                      # HTML email
+                                                      ), name='password_reset'),
     path('password_reset/done/', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('accounts/password_reset_complete/',
