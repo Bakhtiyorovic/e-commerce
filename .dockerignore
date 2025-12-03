@@ -1,0 +1,15 @@
+# Maxfiy sozlamalar fayli
+.env
+
+# Statik va media fayllar (ularni alohida volume orqali boshqarganimiz sababli)
+media/
+staticfiles/
+
+# Python cache va loglar
+__pycache__
+*.pyc
+*.log
+
+# Git bilan bog'liq ma'lumotlar
+.git
+.gitignore
