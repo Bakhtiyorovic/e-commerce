@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # entrypoint.sh ga execute permission berish
-RUN chmod +x /app/entrypoint.sh
+RUN chmod +x /app/deploy/entrypoint.sh
 
 # container ishga tushganda entrypoint.sh ishga tushadi
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/deploy/entrypoint.sh"]
