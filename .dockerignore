@@ -1,5 +1,3 @@
-# Maxfiy sozlamalar fayli
-.env
 
 # Statik va media fayllar (ularni alohida volume orqali boshqarganimiz sababli)
 media/
