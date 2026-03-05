@@ -1,8 +1,5 @@
 
 # Statik va media fayllar (ularni alohida volume orqali boshqarganimiz sababli)
-media/
-staticfiles/
-
 # Python cache va loglar
 __pycache__
 *.pyc
@@ -11,3 +8,6 @@ __pycache__
 # Git bilan bog'liq ma'lumotlar
 .git
 .gitignore
+.env
+venv
+node_modules
